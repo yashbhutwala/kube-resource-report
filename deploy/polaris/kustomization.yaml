@@ -1,0 +1,25 @@
+## Run via:
+# kustomize version
+# {Version:3.5.4 GitCommit:3af514fa9f85430f0c1557c4a0291e62112ab026 BuildDate:2020-01-11T06:57:29+00:00 GoOs:darwin GoArch:amd64}
+#
+# kustomize build deploy/polaris | kubectl apply -f -
+# DO NOT USE: kubectl apply -k deploy/polaris because of older kustomize client embedded in kubectl
+
+# look here for examples
+# https://github.com/kubernetes-sigs/kustomize/blob/master/docs/fields.md
+# https://kubectl.docs.kubernetes.io/pages/examples/kustomize.html
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patchesStrategicMerge:
+  - "kube-resource-report-deployment.yaml"
+
+resources:
+  # bases; default upstream deployments
+  - "../base/"
+  # - "https://github.com/kubernetes-sigs/kustomize/examples/multibases?ref=v1.0.6"
+  # - "https://github.com/hjacobs/kube-resource-report/deploy"
+  - "ingress.yaml"
+
+namespace: "yash"

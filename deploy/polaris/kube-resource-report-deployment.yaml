@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-resource-report
+spec:
+  template:
+    spec:
+      containers:
+        - name: kube-resource-report
+          resources:
+            limits:
+              memory: 1Gi

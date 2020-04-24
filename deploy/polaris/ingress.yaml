@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: monitoring-ingress
+    polaris.synopsys.com/dns_cname_value: monitoring-mt-dev-us-east1.polaris-dev-233821.dev.polaris.synopsys.com
+  labels:
+    app: kube-resource-report
+    app.kubernetes.io/instance: kube-resource-report
+    app.kubernetes.io/name: kube-resource-report
+  name: kube-resource-report
+spec:
+  rules:
+  - host: kuberesourcereport-mt-dev-us-east1.dev.polaris.synopsys.com
+    http:
+      paths:
+      - backend:
+          serviceName: kube-resource-report
+          servicePort: 80
+        path: /
+  # tls:
+  # - hosts:
+  #   - kuberesourcereport-mt-dev-us-east1.dev.polaris.synopsys.com
+  #   secretName: monitoring-ingress-tls
