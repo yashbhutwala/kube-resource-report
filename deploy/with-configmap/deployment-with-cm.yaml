@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-resource-report
+spec:
+  template:
+    spec:
+      containers:
+        - name: kube-resource-report
+          args:
+          - --update-interval-minutes=1
+          - /output
+          # use a custom CSV with node/server prices
+          - --pricing-file=/config/pricing.csv
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        # use a custom CSV with node/server prices
+        - name: config
+          configMap:
+            name: kube-resource-report

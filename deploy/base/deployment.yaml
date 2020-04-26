@@ -21,18 +21,13 @@ spec:
         image: hjacobs/kube-resource-report:20.4.5
         args:
         - --update-interval-minutes=1
+        - /output
         # this is just an example, e.g. for Minikube: assume 30 USD/month cluster costs
         # you can also add any cloud fees here (cost per control plane)
-        - --additional-cost-per-cluster=30.0
-        # optional: use a custom CSV with node/server prices
-        # - --pricing-file=/config/pricing.csv
-        - /output
+        # - --additional-cost-per-cluster=30.0
         volumeMounts:
         - mountPath: /output
           name: report-data
-        # optional: configuration
-        # - mountPath: /config
-        #   name: config
         resources:
           limits:
             memory: 100Mi
@@ -65,7 +60,3 @@ spec:
           - name: report-data
             emptyDir:
               sizeLimit: 500Mi
-          # optional: use a custom CSV with node/server prices
-          # - name: config
-          #   configMap:
-          #     name: kube-resource-report

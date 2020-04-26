@@ -52,4 +52,3 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kube-resource-report
-  namespace: default
